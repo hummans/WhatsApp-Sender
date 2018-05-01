@@ -5,28 +5,25 @@ const chalk = require('chalk');
 const sender = require('./sender.js')
 
 
-
-
-//sender.startbrowser('start')
-
-
-app.get("/", function(req, res) {
-  res.send("<h1>routes</h1>");
-sender.startbrowser()
+app.get("/", async function(req, res) {
+var response = await sender.startbrowser() 
+res.send(response)
 });
 
 app.get('/send/:phone/:message', async function(req, res){
   var number = req.params.phone
   var message = req.params.message
-  res.send(await sender.send(number,message))
+  var response = await sender.send(number,message)
+
+  res.send(response)
 })
 
 app.get('/qrcode', async function(req, res){
-res.send('<img src="Users/FelipeTiozo/Documents/Projetos/WhatsApp-sender/WhatsApp-Sender/example.png" />')
+res.sendFile('./example.png',{root: __dirname })
 })
 
 app.get('/history', function(req, res){
-res.send('starting')
+
 })
 
 app.get('/instructions', function(req, res){
