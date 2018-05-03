@@ -1,4 +1,4 @@
-#WhatsApp-Sender 📱
+# WhatsApp-Sender 📱
 
 Send your own automatic messages without any click
 
@@ -14,14 +14,14 @@ You will be able to send messages to any number using just a link! Getting the m
 
 ## Usage
 
-###In your terminal:
+### In your terminal:
 
 ```
 node index.js
 ```
 So your server is been running at `localhost:3000`
 
-###Init browser 
+### Init browser 
 
 Go to `localhost:3000` in your browser and your terminal will log this:
 
