@@ -13,7 +13,6 @@
   sendbutton = '._2lkdt'
   voicebutton = '_2SbJ1'
   const chalk = require('chalk')
-
   var ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
   };
@@ -37,6 +36,7 @@
     await page.goto('https://web.whatsapp.com')
     console.log()
     console.log(chalk.green('Loaded page ✅'))
+    await delay(2000)
     await page.screenshot({path: 'qrcode.png'});
     console.log()
     console.log(chalk.bgGreen.black.bold(' QRCode is ready to scan 𝌉 '))
@@ -45,7 +45,6 @@
     console.log()
     console.log(chalk.black.bold.bgGreen(' WhatsApp is ready for send message! '))
     console.log()
-    await page.close()
     var response = {browserStatus:'running',qrcodeStatus:'ready'}
     return response 
   }
@@ -55,6 +54,7 @@
     await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36')
     var messageid = ID()
     var status
+    var bodymessage = message
     await page.goto('https://web.whatsapp.com/send?phone='+tel+'&text='+message)
     try{
       await page.waitForSelector(sendbutton);  
@@ -63,9 +63,10 @@
       await console.log(chalk.whiteBright.bgRed(' ')+chalk.whiteBright.bgRed(tel)+chalk.whiteBright.bgRed(' is a invalid number 📵  '));
       await page.close();
       status = 'error'
-      var messagedata = {number:tel,messageId:messageid,messageStatus:status}
+      var messagedata = {messageId:messageid,messageStatus:status}
+      var messagehistory = {messageId:messageid,messageStatus:status,message:bodymessage,sentTo:tel}
       console.log(messagedata)
-      return messagedata
+      return [messagedata,messagehistory]
 
     }
     await page.click(sendbutton,{sendbutton: 'left'})
