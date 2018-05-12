@@ -7,6 +7,8 @@ var history = []
 var objhistory = {history}
 var completehistory = []
 var objcompletehistory = {completehistory}
+var check
+var already = {"browserStatus":"running","qrcodeStatus":"ready"}
 
 async function searchById(id){
     var count = -1
@@ -24,8 +26,14 @@ async function searchById(id){
   }
 
 app.get("/", async function(req, res) {
-var response = await sender.startbrowser() 
-res.send(response)
+  if(check!=1){
+    var response = await sender.startbrowser() 
+    res.send(response)
+    check = 1
+  }else{
+    res.send(already)
+  }
+  
 });
 
 app.get('/send/:phone/:message', async function(req, res){
