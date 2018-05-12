@@ -10,6 +10,12 @@ var objcompletehistory = {completehistory}
 var check
 var already = {"browserStatus":"running","qrcodeStatus":"ready"}
 
+console.reset = function () {
+  return process.stdout.write('\033c');
+}
+
+console.reset()
+
 async function searchById(id){
     var count = -1
     for(var i = 0;i < completehistory.length;i++){
@@ -27,6 +33,7 @@ async function searchById(id){
 
 app.get("/", async function(req, res) {
   if(check!=1){
+    console.reset()
     var response = await sender.startbrowser() 
     res.send(response)
     check = 1
@@ -58,4 +65,4 @@ var messageid = req.params.id
 res.send(await searchById(messageid))
 })
 
-http.createServer(app).listen(3000, () => console.log(chalk.bgWhite.black.bold(' Server running on localhost:3000 ')));
+http.createServer(app).listen(8080, () => console.log(chalk.bgWhite.black.bold(' Server running on localhost:8080 ')));
