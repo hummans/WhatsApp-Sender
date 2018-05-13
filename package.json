@@ -5,7 +5,6 @@
   "repository": "https://github.com/felipetiozo/WhatsApp-Sender.git",
   "author": "Felipe Tiozo <felipetiozo10@gmail.com>",
   "main":"server.js",
-  "scripts":{"server.js"},
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.3",
